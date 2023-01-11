@@ -97,3 +97,8 @@ export const login = async (req, res) => {
         console.log(err)
     }
 }
+
+// middleware
+export const secret = async (req, res) => {
+    res.json({ currentUser: req.user })
+}
