@@ -1,3 +1,5 @@
+import React from "react"
+
 const Jumbotron = ({title, subtitle}) => {
   return (
     <div className="container-fluid bg-primary">

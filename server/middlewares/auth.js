@@ -4,7 +4,7 @@ import User from '../models/user.js'
 export const requireSignin = (req, res, next) => {
     try {
         const decoded = jwt.verify(
-            req.headers.authorization,
+            req.headers.authorization, // headers -> authorization = token from logged_user
             process.env.JWT_SECRET
         )
         req.user = decoded
