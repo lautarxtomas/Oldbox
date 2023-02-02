@@ -41,7 +41,7 @@ export const register = async (req, res) => {
         })
         // 7. send response
         res.json({
-            registered_user: {
+            user: {
                 name: user.name,
                 email: user.email,
                 role: user.role,
@@ -84,7 +84,7 @@ export const login = async (req, res) => {
         })
         // 6. send response
         res.json({
-            logged_user: {
+            user: {
                 name: user.name,
                 email: user.email,
                 role: user.role,
