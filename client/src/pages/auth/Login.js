@@ -1,10 +1,11 @@
 import React from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
 import { useState } from "react";
-
 import axios from 'axios'
 import toast from "react-hot-toast"
 import { useAuth } from "../../context/auth";
+import { useNavigate } from "react-router-dom"
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const Login = () => {
 
   // hook
   const [auth, setAuth] = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault() // => website doesnt recharge on submit
@@ -31,6 +33,7 @@ const Login = () => {
           localStorage.setItem("auth", JSON.stringify(data))
           setAuth({...auth, token: data.token, user: data.user})
           toast.success("Login successful")
+          navigate("/dashboard")
         }
     } catch (err) {
       console.log(err)
@@ -40,7 +43,7 @@ const Login = () => {
 
   return (
     <div>
-      <Jumbotron title="Login" subtitle="Login page" />
+      <Jumbotron title="Login" subtitle="Welcome to react e-commerce" />
 
       <div className="container mt-5">
         <div className="row">

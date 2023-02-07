@@ -1,10 +1,10 @@
 import React from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
 import { useState } from "react";
-
 import axios from 'axios'
 import toast from "react-hot-toast"
 import { useAuth } from "../../context/auth";
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -13,6 +13,7 @@ const Register = () => {
 
   // hook
   const [auth, setAuth] = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault() // => website doesnt recharge on submit
@@ -33,6 +34,7 @@ const Register = () => {
           localStorage.setItem("auth", JSON.stringify(data))
           setAuth({...auth, token: data.token, user: data.user})
           toast.success("Registration successful")
+          navigate("/dashboard")
         }
     } catch (err) {
       console.log(err)
