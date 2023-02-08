@@ -1,4 +1,5 @@
 import { useState, createContext, useContext, useEffect } from "react";
+import axios from 'axios'
 
 const AuthContext = createContext()
 
@@ -8,9 +9,14 @@ const AuthProvider = ({children}) => {
         token: ''
     })
 
+    // axios config
+    axios.defaults.baseURL = process.env.REACT_APP_API // se usa siempre localhost:8080/api
+    axios.defaults.headers.common['Authorization'] = auth?.token // se guarda en Authorization el token del usuario logeado 
+
+
     useEffect(() => {
         const data = localStorage.getItem("auth")
-        if(data) {
+        if (data) {
             const parsed = JSON.parse(data)
             setAuth({...auth, user: parsed.user, token: parsed.token})
         }

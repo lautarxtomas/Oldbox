@@ -37,11 +37,33 @@ const Menu = () => {
             </li>
           </>
         ) : (
-          <li className="nav-item pointer">
-            <a onClick={logout} className="nav-link">
-              LOGOUT
-            </a>
-          </li>
+          <div className="dropdown">
+            <li>
+              <a
+                className="nav-link pointer dropdown-toggle"
+                data-bs-toggle="dropdown"
+              >
+                {auth?.user?.name}
+              </a>
+
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} // si en el user tiene role = 1 es admin, por lo tanto entra a la ruta dashboard/admin, sino, dashboard/user
+                  >
+                    DASHBOARD
+                  </NavLink>
+                </li>
+
+                <li className="nav-item pointer">
+                  <a onClick={logout} className="nav-link">
+                    LOGOUT
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </div>
         )}
       </ul>
     </>

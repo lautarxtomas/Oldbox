@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from 'axios'
 import toast from "react-hot-toast"
 import { useAuth } from "../../context/auth";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 
 const Login = () => {
@@ -14,12 +14,12 @@ const Login = () => {
   // hook
   const [auth, setAuth] = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleSubmit = async (e) => {
     e.preventDefault() // => website doesnt recharge on submit
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/login`,
+      const { data } = await axios.post(`/login`,
         {
           email,
           password
@@ -33,7 +33,7 @@ const Login = () => {
           localStorage.setItem("auth", JSON.stringify(data))
           setAuth({...auth, token: data.token, user: data.user})
           toast.success("Login successful")
-          navigate("/dashboard")
+          navigate(location.state || `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`)
         }
     } catch (err) {
       console.log(err)

@@ -18,8 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault() // => website doesnt recharge on submit
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/register`,
+      const { data } = await axios.post(`/register`,
         {
           name,
           email,
