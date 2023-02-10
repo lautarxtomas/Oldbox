@@ -92,7 +92,7 @@ export const remove = async (req, res) => {
     const product = await Product.findByIdAndDelete(
       req.params.productId
     ).select("-photo");
-    res.json({ deleted_product: product });
+    res.json(product);
   } catch (err) {
     return res.status(400).json(err.message);
   }
@@ -142,7 +142,7 @@ export const update = async (req, res) => {
     } // SOLO MODIFICA LA FOTO SI LA RECIBE
 
     await product.save();
-    res.json({ updated_product: product });
+    res.json(product);
   } catch (err) {
     console.log(err);
     return res.status(400).json(err.message);

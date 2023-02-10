@@ -34,7 +34,7 @@ export const update = async (req, res) => {
         },
         { new: true }
         )
-        res.json({ updated_category: category })
+        res.json(category)
     } catch (err) {
         console.log(err)
         return res.status(400).json(err.message)
@@ -44,7 +44,7 @@ export const update = async (req, res) => {
 export const remove = async (req, res) => {
     try {
         const removed = await Category.findByIdAndDelete(req.params.categoryId)
-        res.json({ removed_category: removed })
+        res.json(removed)
     } catch (err) {
         console.log(err)
         return res.status(400).json(err.message)
@@ -54,7 +54,7 @@ export const remove = async (req, res) => {
 export const getAll = async (req, res) => {
     try {
         const all = await Category.find({})
-        res.json({ all_categories: all })
+        res.json(all)
     } catch (err) {
         console.log(err)
         return res.status(400).json(err.message)

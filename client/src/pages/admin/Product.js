@@ -3,7 +3,7 @@ import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
 
-const Dashboard = () => {
+const AdminProduct = () => {
   // context
   const [auth, setAuth] = useAuth();
 
@@ -20,13 +20,9 @@ const Dashboard = () => {
             <AdminMenu/>
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light"> Admin Information </div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light"> Create products </div>
 
-            <ul className="list-group">
-              <li className="list-group-item">{auth?.user?.name}</li>
-              <li className="list-group-item">{auth?.user?.email}</li>
-              <li className="list-group-item">ADMIN</li>
-            </ul>
+            <p>Create products form...</p>
           </div>
         </div>
       </div>
@@ -34,4 +30,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AdminProduct;

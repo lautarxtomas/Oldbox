@@ -10,6 +10,10 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDashboard from './pages/admin/Dashboard'
 import AdminRoute from "./components/routes/AdminRoute";
+import AdminCategory from "./pages/admin/Category";
+import AdminProduct from "./pages/admin/Product";
+import UserOrders from "./pages/user/Orders"
+import UserProfile from "./pages/user/Profile"
 
 const PageNotFound = () => {
   return (
@@ -30,10 +34,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<UserDashboard />} />
+          <Route path="user/profile" element={<UserProfile />} />
+          <Route path="user/orders" element={<UserOrders />} />
+
         </Route>
 
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/category" element={<AdminCategory/>} />
+          <Route path="admin/product" element={<AdminProduct />} />
         </Route>
         <Route path="*" element={<PageNotFound/>} replace />
       </Routes>
