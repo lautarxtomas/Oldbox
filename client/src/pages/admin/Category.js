@@ -15,9 +15,8 @@ const AdminCategory = () => {
   const [name, setName] = useState("");
   const [categories, setCategories] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(null);
   const [updatingName, setUpdatingName] = useState("");
-
 
   useEffect(() => {
     loadCategories();
@@ -50,13 +49,43 @@ const AdminCategory = () => {
   };
 
   const handleUpdate = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      console.log('Updating category =>', updatingName)
+      const { data } = await axios.put(`/category/${selected._id}`, {
+        name: updatingName,
+      });
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success(`"${data.name}" was updated`);
+        setSelected(null);
+        setUpdatingName("");
+        loadCategories();
+        setVisible(false);
+      }
     } catch (err) {
-      console.log(err)
+      console.log(err);
+      toast.error("Category may already exist. Try again");
     }
-  }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.delete(`/category/${selected._id}`);
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success(`"${data.name}" was deleted`);
+        setSelected(null);
+        loadCategories();
+        setVisible(false);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Category may already exist. Try again");
+    }
+  };
 
   return (
     <>
@@ -89,8 +118,8 @@ const AdminCategory = () => {
                     className="btn btn-outline-primary m-3"
                     onClick={() => {
                       setVisible(true);
-                      setSelected(c)
-                      setUpdatingName(c.name)
+                      setSelected(c);
+                      setUpdatingName(c.name);
                     }}
                   >
                     {c.name}
@@ -110,6 +139,8 @@ const AdminCategory = () => {
                 setValue={setUpdatingName}
                 handleSubmit={handleUpdate}
                 placeholder="Update category name"
+                buttonText="Update"
+                handleDelete={handleDelete}
               />
             </Modal>
           </div>
