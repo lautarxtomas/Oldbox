@@ -8,20 +8,22 @@ import Menu from "./components/nav/Menu";
 import UserDashboard from "./pages/user/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminDashboard from './pages/admin/Dashboard'
+import AdminDashboard from "./pages/admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminCategory from "./pages/admin/Category";
 import AdminProduct from "./pages/admin/Product";
-import UserOrders from "./pages/user/Orders"
-import UserProfile from "./pages/user/Profile"
+import AdminProducts from "./pages/admin/Products";
+import AdminProductUpdate from "./pages/admin/ProductUpdate";
+import UserOrders from "./pages/user/Orders";
+import UserProfile from "./pages/user/Profile";
 
 const PageNotFound = () => {
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       404 | Page not found
     </div>
-  )
-}
+  );
+};
 
 function App() {
   return (
@@ -36,15 +38,19 @@ function App() {
           <Route path="user" element={<UserDashboard />} />
           <Route path="user/profile" element={<UserProfile />} />
           <Route path="user/orders" element={<UserOrders />} />
-
         </Route>
 
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/category" element={<AdminCategory/>} />
+          <Route path="admin/category" element={<AdminCategory />} />
           <Route path="admin/product" element={<AdminProduct />} />
+          <Route path="admin/products" element={<AdminProducts />} />
+          <Route
+            path="admin/product/update/:slug"
+            element={<AdminProductUpdate />}
+          />
         </Route>
-        <Route path="*" element={<PageNotFound/>} replace />
+        <Route path="*" element={<PageNotFound />} replace />
       </Routes>
     </BrowserRouter>
   );

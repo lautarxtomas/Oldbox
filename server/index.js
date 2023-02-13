@@ -14,12 +14,12 @@ const app = express()
 // db
 mongoose
 .connect(process.env.MONGO_URI)
-.then(() => console.log('DB Connected'))
+.then(() => console.log('DB Connected 💾'))
 .catch((err) => console.log("DB ERROR => ", err ))
 
 // middlewares
 app.use(cors()) // for axios petitions
-app.use(morgan('dev'))
+app.use(morgan('dev')) // requests logger
 app.use(express.json())
 
 // routes
@@ -30,6 +30,6 @@ app.use("/api", productRoutes)
 const PORT = process.env.PORT || 8080
 
 app.listen(PORT, () => {
-    console.log(`Node server is running on port ${PORT}`)
+    console.log(`Node server is running on port ${PORT} 🚀`)
 });
 
