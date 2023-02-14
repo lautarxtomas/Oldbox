@@ -15,19 +15,19 @@ export const create = async (req, res) => {
       true // se puede hacer con switch o con if como en las validaciones de los otros controllers
     ) {
       case !name.trim(): // se puede dejar el trim (para sacar espacios de los costados) o dejarlo sin, se va a validar igual.
-        res.json({ error: "Name is required" });
+        return res.json({ error: "Name is required" });
       case !description.trim():
-        res.json({ error: "Description is required" });
+        return res.json({ error: "Description is required" });
       case !price.trim():
-        res.json({ error: "Price is required" });
+        return res.json({ error: "Price is required" });
       case !category.trim():
-        res.json({ error: "Category is required" });
+        return res.json({ error: "Category is required" });
       case !quantity.trim():
-        res.json({ error: "Quantity is required" });
+        return res.json({ error: "Quantity is required" });
       case !shipping.trim():
-        res.json({ error: "Shipping is required" });
+        return res.json({ error: "Shipping is required" });
       case photo && photo.size > 1000000:
-        res.json({ error: "Image should be less than 1mb in size" });
+        return res.json({ error: "Image should be less than 1mb in size" });
     }
 
     // create product
