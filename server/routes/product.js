@@ -14,7 +14,9 @@ import {
   photo,
   remove,
   update,
-  filteredProducts
+  filteredProducts,
+  productsCount,
+  listProducts,
 } from "../controllers/product.js";
 
 // CRUD
@@ -25,5 +27,7 @@ router.get("/product/photo/:productId", photo); // GET PHOTO FROM PRODUCT
 router.delete("/product/:productId", remove);
 router.put("/product/:productId", requireSignin, isAdmin, formidable(), update);
 router.post("/filtered-products", filteredProducts);
+router.get("/products-count", productsCount);
+router.get("/list-products/:page", listProducts);
 
 export default router;

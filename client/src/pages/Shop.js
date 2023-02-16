@@ -112,7 +112,10 @@ const Shop = () => {
 
           <div className="col-md-9">
             <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">Products</h2>
-            <div className="row" style={{ height: "100vh", overflow: "scroll" }}>
+            <div
+              className="row"
+              style={{ height: "100vh", overflow: "scroll" }}
+            >
               {products?.map((p) => (
                 <div className="col-md-4" key={p._id}>
                   <ProductCard p={p} />

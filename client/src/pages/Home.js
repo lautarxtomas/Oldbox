@@ -8,17 +8,47 @@ import ProductCard from "../components/cards/ProductCard";
 const Home = () => {
   // state
   const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadProducts();
+    getTotal();
   }, []);
+
+  useEffect(() => {
+    if(page === 1) return;
+    loadMore()
+  }, [page]);
+
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/products-count");
+      setTotal(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const loadProducts = async () => {
     try {
-      const { data } = await axios.get("/products");
+      const { data } = await axios.get(`/list-products/${page}`);
       setProducts(data);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const loadMore = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`/list-products/${page}`);
+      setProducts([...products, ...data]);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
   };
 
@@ -54,6 +84,20 @@ const Home = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="container text-center p-5">
+        {products && products.length < total && (
+          <button
+            className="btn btn-warning btn-lg"
+            disabled={loading}
+            onClick={(e) => {
+              e.preventDefault();
+              setPage(page + 1);
+            }}
+          >
+            {loading ? "Loading..." : "Load more"}
+          </button>
+        )}
       </div>
     </div>
   );

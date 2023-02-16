@@ -56,7 +56,9 @@ const Menu = () => {
                 <li>
                   <NavLink
                     className="nav-link"
-                    to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} // si en el user tiene role = 1 es admin, por lo tanto entra a la ruta dashboard/admin, sino, dashboard/user
+                    to={`/dashboard/${
+                      auth?.user?.role === 1 ? "admin" : "user"
+                    }`} // si en el user tiene role = 1 es admin, por lo tanto entra a la ruta dashboard/admin, sino, dashboard/user
                   >
                     DASHBOARD
                   </NavLink>

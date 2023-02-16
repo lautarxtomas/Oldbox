@@ -152,13 +152,37 @@ export const update = async (req, res) => {
 export const filteredProducts = async (req, res) => {
   try {
     const { checked, radio } = req.body;
-    
+
     let args = {};
     if (checked.length > 0) args.category = checked;
     if (radio.length > 0) args.price = { $gte: radio[0], $lte: radio[1] };
 
-    const products = await Product.find(args)
-    res.json(products)
+    const products = await Product.find(args);
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const productsCount = async (req, res) => {
+  try {
+    const total = await Product.find({}).estimatedDocumentCount();
+    res.json(total);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const listProducts = async (req, res) => {
+  try {
+    const perPage = 6;
+    const page = req.params.page ? req.params.page : 1;
+    const products = await Product.find({})
+      .skip((page - 1) * perPage)
+      .limit(6)
+      .select("-photo")
+      .sort({ createdAt: -1 });
+    res.json(products);
   } catch (err) {
     console.log(err);
   }
