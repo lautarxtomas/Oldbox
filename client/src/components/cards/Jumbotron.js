@@ -2,10 +2,10 @@ import React from "react"
 
 const Jumbotron = ({title, subtitle}) => {
   return (
-    <div className="container-fluid bg-primary">
+    <div className="container-fluid jumbotron">
         <div className="row">
-            <div className="col text-center p-5 bg-light">
-                <h1>{title}</h1>
+            <div className="col text-center p-5">
+                <h1 className="fw-bold">{title}</h1>
                 <p className="lead"> {subtitle} </p>
             </div>
         </div>
