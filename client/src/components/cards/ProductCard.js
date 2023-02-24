@@ -1,8 +1,11 @@
 import React from "react";
-import moment from "moment";
 import { Badge } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ p }) => {
+
+  const navigate = useNavigate()
+
   return (
     <div className="card mb-3 hoverable">
       <Badge.Ribbon text={`${p?.sold} sold`} color="red">
@@ -31,13 +34,14 @@ const ProductCard = ({ p }) => {
             style: 'currency',
             currency: 'USD'
         })}</h4>
-        <p className="card-text">{p?.description?.substring(0, 60)}...</p>
+        <p className="card-text">{p?.description?.substring(0, 60)} {p?.description?.length > 60 && '...'} </p>
       </div>
 
       <div className="d-flex justify-content-between">
         <button
           className="btn btn-primary col card-button"
           style={{ borderBottomLeftRadius: "5px" }}
+          onClick={() => navigate(`/product/${p.slug}`)}
         >
           View Product
         </button>
@@ -49,9 +53,6 @@ const ProductCard = ({ p }) => {
           Add to Cart
         </button>
       </div>
-
-      {/* <p>{moment(p.createdAt).fromNow()}</p>
-      <p>{p.sold} sold </p> */}
     </div>
   );
 };

@@ -187,3 +187,34 @@ export const listProducts = async (req, res) => {
     console.log(err);
   }
 };
+
+export const productsSearch = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const results = await Product.find({
+      $or: [
+        { name: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+      ],
+    }).select("-photo");
+    res.json(results);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const relatedProducts = async (req, res) => {
+  try {
+    const { productId, categoryId } = req.params;
+    const related = await Product.find({
+      category: categoryId,
+      _id: { $ne: productId },
+    })
+      .select("-photo")
+      .populate("category")
+      .limit(3);
+    res.json(related);
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
+import Search from "../forms/Search";
 
 const Menu = () => {
   // hook
@@ -16,7 +17,7 @@ const Menu = () => {
 
   return (
     <>
-      <ul className="nav d-flex justify-content-center shadow mb-2">
+      <ul className="nav d-flex justify-content-between shadow mb-2">
         <li className="nav-item">
           <NavLink className="nav-link" aria-current="page" to="/">
             HOME
@@ -28,6 +29,8 @@ const Menu = () => {
             SHOP
           </NavLink>
         </li>
+
+        <Search />
 
         {!auth?.user ? (
           <>

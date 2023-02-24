@@ -6,6 +6,8 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Menu from "./components/nav/Menu";
 import UserDashboard from "./pages/user/Dashboard";
+import UserOrders from "./pages/user/Orders";
+import UserProfile from "./pages/user/Profile";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -14,9 +16,9 @@ import AdminCategory from "./pages/admin/Category";
 import AdminProduct from "./pages/admin/Product";
 import AdminProducts from "./pages/admin/Products";
 import AdminProductUpdate from "./pages/admin/ProductUpdate";
-import UserOrders from "./pages/user/Orders";
-import UserProfile from "./pages/user/Profile";
 import Shop from "./pages/Shop";
+import Search from "./pages/Search"
+import ProductView from "./pages/ProductView";
 
 const PageNotFound = () => {
   return (
@@ -34,6 +36,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/search" element={<Search/>}/>
+        <Route path="/product/:slug" element={<ProductView/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
