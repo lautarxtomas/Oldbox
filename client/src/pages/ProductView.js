@@ -82,7 +82,7 @@ const ProductView = () => {
             <div className="d-flex justify-content-between lead p-5 bg-light fw-bold">
               <div>
                 <p className="fw-bold">
-                  <FaDollarSign /> Price:
+                  <FaDollarSign /> Price:{" "}
                   {product?.price?.toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
@@ -123,12 +123,11 @@ const ProductView = () => {
 
         <div className="col-md-3">
           <h2>Related products</h2>
-          <hr/>
+          <hr />
           {related?.length < 1 && <p>Nothing found</p>}
           {related?.map((p) => (
             <ProductCard p={p} key={p._id} />
           ))}
-
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ import {
   productsCount,
   listProducts,
   productsSearch,
-  relatedProducts
+  relatedProducts,
 } from "../controllers/product.js";
 
 // CRUD
