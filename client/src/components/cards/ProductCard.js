@@ -1,10 +1,14 @@
 import React from "react";
 import { Badge } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context/cart";
+import toast from "react-hot-toast"
 
 const ProductCard = ({ p }) => {
-
-  const navigate = useNavigate()
+  // context
+  const [cart, setCart] = useCart();
+  // hooks
+  const navigate = useNavigate();
 
   return (
     <div className="card mb-3 hoverable">
@@ -30,11 +34,16 @@ const ProductCard = ({ p }) => {
       <div className="card-body">
         <h5>{p?.name}</h5>
 
-        <h4 className="fw-bold">{p?.price?.toLocaleString("en-US", {
-            style: 'currency',
-            currency: 'USD'
-        })}</h4>
-        <p className="card-text">{p?.description?.substring(0, 60)} {p?.description?.length > 60 && '...'} </p>
+        <h4 className="fw-bold">
+          {p?.price?.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })}
+        </h4>
+        <p className="card-text">
+          {p?.description?.substring(0, 60)}{" "}
+          {p?.description?.length > 60 && "..."}{" "}
+        </p>
       </div>
 
       <div className="d-flex justify-content-between">
@@ -49,6 +58,11 @@ const ProductCard = ({ p }) => {
         <button
           className="btn btn-outline-primary col card-button"
           style={{ borderBottomRightRadius: "5px" }}
+          onClick={() => {
+            setCart([...cart, p]);
+            localStorage.setItem('cart', JSON.stringify([...cart, p]))
+            toast.success(`"${p.name}" added to cart`)
+          }}
         >
           Add to Cart
         </button>

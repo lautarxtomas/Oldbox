@@ -4,10 +4,13 @@ import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 import Search from "../forms/Search";
 import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/cart";
+import { Badge } from "antd";
 
 const Menu = () => {
   // context
   const [auth, setAuth] = useAuth();
+  const [cart, setCart] = useCart();
 
   // hooks
   const categories = useCategory();
@@ -21,7 +24,7 @@ const Menu = () => {
 
   return (
     <>
-      <ul className="nav d-flex justify-content-between shadow mb-2">
+      <ul className="nav d-flex justify-content-between align-items-center shadow mb-2 sticky-top bg-light">
         <li className="nav-item">
           <NavLink className="nav-link" aria-current="page" to="/">
             HOME
@@ -40,20 +43,20 @@ const Menu = () => {
               className="nav-link pointer dropdown-toggle"
               data-bs-toggle="dropdown"
             >
-              Categories
+              CATEGORIES
             </a>
 
             <ul
               className="dropdown-menu"
               style={{ height: "300px", overflow: "scroll" }}
             >
-               <li>
-                  <NavLink className="nav-link" to={`/categories/`}>
-                    All Categories
-                  </NavLink>
-                </li>
+              <li>
+                <NavLink className="nav-link" to={`/categories/`}>
+                  All Categories
+                </NavLink>
+              </li>
               {categories?.map((c) => (
-                <li>
+                <li key={c._id}>
                   <NavLink className="nav-link" to={`/category/${c.slug}`}>
                     {c.name}
                   </NavLink>
@@ -62,6 +65,18 @@ const Menu = () => {
             </ul>
           </li>
         </div>
+
+        <li className="nav-item">
+          <Badge
+            count={cart?.length >= 1 ? cart.length : 0}
+            offset={[-2, 11]}
+            showZero={true}
+          >
+            <NavLink className="nav-link" aria-current="page" to="/cart">
+              CART
+            </NavLink>
+          </Badge>
+        </li>
 
         <Search />
 
@@ -85,7 +100,7 @@ const Menu = () => {
                 className="nav-link pointer dropdown-toggle"
                 data-bs-toggle="dropdown"
               >
-                {auth?.user?.name}
+                {auth?.user?.name?.toUpperCase()}
               </a>
 
               <ul className="dropdown-menu">
