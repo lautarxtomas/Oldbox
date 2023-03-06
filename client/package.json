@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.2.0",
     "axios": "^1.3.0",
+    "braintree": "^3.13.0",
+    "braintree-web-drop-in-react": "^1.2.1",
     "moment": "^2.29.4",
     "parseuri": "^0.0.6",
     "parseurl": "^1.3.3",

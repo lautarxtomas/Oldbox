@@ -1,6 +1,18 @@
 import slugify from "slugify";
 import Product from "../models/product.js";
 import fs from "fs";
+import braintree from "braintree";
+import dotenv from "dotenv";
+import Order from "../models/order.js";
+
+dotenv.config();
+
+const gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  merchantId: process.env.BRAINTREE_MERCHANT_ID,
+  publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+  privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+});
 
 export const create = async (req, res) => {
   try {
@@ -214,6 +226,80 @@ export const relatedProducts = async (req, res) => {
       .populate("category")
       .limit(3);
     res.json(related);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// BRAINTREE
+export const getToken = async (req, res) => {
+  try {
+    gateway.clientToken.generate({}, function (err, response) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(response);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const processPayment = async (req, res) => {
+  try {
+    // console.log(req.body);
+    const { nonce, cart } = req.body;
+
+    let total = 0;
+    cart.map((i) => {
+      total += i.price;
+    });
+
+    console.log("total =>", total);
+
+    let newTransaction = gateway.transaction.sale(
+      {
+        amount: total,
+        paymentMethodNonce: nonce,
+        options: {
+          submitForSettlement: true,
+        },
+      },
+      function (err, result) {
+        if (result) {
+          // res.send(result);
+          // create order
+          const order = new Order({
+            products: cart,
+            payment: result,
+            buyer: req.user._id,
+          }).save();
+          // decrementQuantity
+          decrementQuantity(cart);
+          res.json({ ok: true });
+        } else {
+          res.status(500).send(err);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const decrementQuantity = async (cart) => {
+  try {
+    // build mongodb query
+    const bulkOps = cart.map((item) => {
+      return {
+        updateOne: {
+          filter: { _id: item._id },
+          update: { $inc: { quantity: -0, sold: +1 } },
+        },
+      };
+    });
+    const updated = await Product.bulkWrite(bulkOps, {})
   } catch (err) {
     console.log(err);
   }

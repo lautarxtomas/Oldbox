@@ -8,6 +8,7 @@ import { requireSignin, isAdmin } from "../middlewares/auth.js";
 
 // controllers
 import {
+  // crud
   create,
   getAll,
   getProduct,
@@ -19,6 +20,9 @@ import {
   listProducts,
   productsSearch,
   relatedProducts,
+  // braintree
+  getToken,
+  processPayment,
 } from "../controllers/product.js";
 
 // CRUD
@@ -31,7 +35,11 @@ router.put("/product/:productId", requireSignin, isAdmin, formidable(), update);
 router.post("/filtered-products", filteredProducts);
 router.get("/products-count", productsCount);
 router.get("/list-products/:page", listProducts);
-router.get('/products/search/:keyword', productsSearch);
-router.get("/related-products/:productId/:categoryId", relatedProducts)
+router.get("/products/search/:keyword", productsSearch);
+router.get("/related-products/:productId/:categoryId", relatedProducts);
+
+// BRAINTREE
+router.get("/braintree/token", getToken);
+router.post("/braintree/payment", requireSignin, processPayment);
 
 export default router;
