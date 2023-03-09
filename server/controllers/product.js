@@ -4,6 +4,7 @@ import fs from "fs";
 import braintree from "braintree";
 import dotenv from "dotenv";
 import Order from "../models/order.js";
+import { transporter } from "../notifications/mailer.js";
 
 dotenv.config();
 
@@ -16,16 +17,12 @@ const gateway = new braintree.BraintreeGateway({
 
 export const create = async (req, res) => {
   try {
-    // console.log(req.fields) // los campos que están en Body -> form-data
-    // console.log(req.files)
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
 
     // validation
-    switch (
-      true // se puede hacer con switch o con if como en las validaciones de los otros controllers
-    ) {
+    switch (true) {
       case !name.trim(): // se puede dejar el trim (para sacar espacios de los costados) o dejarlo sin, se va a validar igual.
         return res.json({ error: "Name is required" });
       case !description.trim():
@@ -299,7 +296,34 @@ const decrementQuantity = async (cart) => {
         },
       };
     });
-    const updated = await Product.bulkWrite(bulkOps, {})
+    const updated = await Product.bulkWrite(bulkOps, {});
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const orderStatus = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const order = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    ).populate("buyer", "email name");
+
+    // send email on status change
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to: order.buyer.email,
+      subject: "Order status",
+      html: `
+       <h1>Hi ${order.buyer.name}, your order's status is: <span style="color:red">${order.status}</span> </h1>
+       <p>Visit <a href="${process.env.CLIENT_URL}/dashboard/user/orders">your dashboard</a> for more details</p>
+       `,
+    });
+
+    res.json(order);
   } catch (err) {
     console.log(err);
   }

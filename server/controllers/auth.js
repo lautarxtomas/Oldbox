@@ -141,3 +141,15 @@ export const getOrders = async (req, res) => {
     console.log(err);
   }
 };
+
+export const allOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .populate("products", "-photo")
+      .populate("buyer", "name")
+      .sort({ createdAt: "-1" })
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+  }
+};

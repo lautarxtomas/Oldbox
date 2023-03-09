@@ -66,7 +66,7 @@ const Shop = () => {
 
   return (
     <>
-      <Jumbotron title="Hello world" subtitle="Welcome to React E-commerce" />
+      <Jumbotron title="Shop page" subtitle="" />
 
       <div className="container-fluid">
         <div className="row">

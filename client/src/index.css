@@ -1,3 +1,10 @@
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+*{
+  font-family: Righteous;
+}
+
 .active {
   text-decoration: underline !important;
   text-decoration-thickness: 5px !important;
@@ -28,16 +35,32 @@
 
 /* jumbotron color animation css */
 .jumbotron {
-  width: 30wh;
-  height: 30vh;
+  /* width: 30wh;
+  height: 30vh; */
+  position: relative;
   color: #fff;
+  font-family: 'Righteous', cursive; 
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  z-index: -999;
   background-size: 400% 400%;
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;
   animation: Gradient 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
- 
+
+.jumbotron img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  width: 320px;
+  opacity: 0.5;
+}
+
 
 /* FOR MOZILLA AND SAFARI */
 @-webkit-keyframes Gradient {
@@ -75,3 +98,4 @@
     background-position: 0% 50%;
   }
 }
+

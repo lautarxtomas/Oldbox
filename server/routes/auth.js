@@ -6,7 +6,7 @@ const router = express.Router()
 import { requireSignin, isAdmin } from '../middlewares/auth.js'
 
 // controllers
-import { login, register, secret, updateProfile, getOrders } from '../controllers/auth.js'
+import { login, register, secret, updateProfile, getOrders, allOrders } from '../controllers/auth.js'
 
 router.post('/register', register)
 router.post('/login', login)
@@ -22,6 +22,7 @@ router.put('/profile', requireSignin, updateProfile)
 
 // orders
 router.get('/orders', requireSignin, getOrders)
+router.get('/all-orders', requireSignin, isAdmin, allOrders)
 
 // testing
 router.get('/secret', requireSignin, isAdmin, secret)

@@ -30,7 +30,7 @@ const AdminProducts = () => {
     <div>
       <Jumbotron
         title={`Hello ${auth?.user?.name}`}
-        subtitle="Admin dashboard"
+        subtitle="Product dashboard"
       />
 
       <div className="container-fluid">

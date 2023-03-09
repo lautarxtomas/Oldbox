@@ -115,9 +115,9 @@ const UserCartSidebar = () => {
             <DropIn
               options={{
                 authorization: clientToken,
-                paypal: {
-                  flow: "vault",
-                },
+                // paypal: {
+                //   flow: "vault",
+                // }, // PAYPAL NOT WORKING :(
               }}
               onInstance={(instance) => setInstance(instance)}
             />

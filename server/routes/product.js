@@ -23,6 +23,7 @@ import {
   // braintree
   getToken,
   processPayment,
+  orderStatus
 } from "../controllers/product.js";
 
 // CRUD
@@ -41,5 +42,7 @@ router.get("/related-products/:productId/:categoryId", relatedProducts);
 // BRAINTREE
 router.get("/braintree/token", getToken);
 router.post("/braintree/payment", requireSignin, processPayment);
+
+router.put('/order-status/:orderId', requireSignin, isAdmin, orderStatus)
 
 export default router;

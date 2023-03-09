@@ -91,7 +91,7 @@ const AdminCategory = () => {
     <>
       <Jumbotron
         title={`Hello ${auth?.user?.name}`}
-        subtitle="Admin dashboard"
+        subtitle="Category dashboard"
       />
 
       <div className="container-fluid">

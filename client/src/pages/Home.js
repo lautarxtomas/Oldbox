@@ -57,7 +57,7 @@ const Home = () => {
 
   return (
     <div>
-      <Jumbotron title="Hello world" subtitle="Welcome to react e-commerce" />
+      <Jumbotron title="" subtitle="" />
 
       <div className="row m-3">
         <div className="col-md-6">
