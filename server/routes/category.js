@@ -17,6 +17,3 @@ router.get('/category/:slug', getById)
 router.get('/products-by-category/:slug', getProductsByCategory);
 
 export default router
-
-
-// NOTA: el categoryId es el "_id" automático que se genera al postear en MongoDB. Usar ese mismo a la hora de updatear o deletear una categoría por parámetro.

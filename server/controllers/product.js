@@ -109,17 +109,15 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    // console.log(req.fields) // los campos que están en Body -> form-data
-    // console.log(req.files)
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
 
     // validation
     switch (
-      true // se puede hacer con switch o con if como en las validaciones de los otros controllers
+      true
     ) {
-      case !name.trim(): // se puede dejar el trim (para sacar espacios de los costados) o dejarlo sin, se va a validar igual.
+      case !name.trim():
         return res.json({ error: "Name is required" });
       case !description.trim():
         return res.json({ error: "Description is required" });
