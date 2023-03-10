@@ -1,3 +1,0 @@
-Agregar .env
-
-REACT_APP_API=http://localhost:7070/api
