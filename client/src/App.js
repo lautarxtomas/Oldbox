@@ -23,6 +23,7 @@ import CategoriesList from "./pages/CategoriesList";
 import CategoryView from "./pages/CategoryView";
 import Cart from "./pages/Cart";
 import AdminOrders from "./pages/admin/Orders";
+import Chat from "./pages/Chat";
 
 const PageNotFound = () => {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/categories" element={<CategoriesList />} />
         <Route path="/category/:slug" element={<CategoryView />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/search" element={<Search />} />
         <Route path="/product/:slug" element={<ProductView />} />
         <Route path="/login" element={<Login />} />

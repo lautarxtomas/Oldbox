@@ -80,6 +80,12 @@ const Menu = () => {
 
         <Search />
 
+        <li className="nav-item">
+            <NavLink className="nav-link" aria-current="page" to="/chat">
+              CHAT
+            </NavLink>
+        </li>
+
         {!auth?.user ? (
           <>
             <li className="nav-item">

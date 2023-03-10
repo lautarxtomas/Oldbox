@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "braintree": "^3.13.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -25,6 +26,7 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.20",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "socket.io": "^4.6.1"
   }
 }
