@@ -51,7 +51,7 @@ Para hacer acciones modificadoras (POST, PUT, DELETE) es necesario estar logeado
 https://mern-ecommerce-3ngx.onrender.com/
 
 # REACT APP DEPLOY:
-https://oldboxlfc-lautarxtomas.vercel.app/cart
+https://oldboxlfc-lautarxtomas.vercel.app
 
        
 
