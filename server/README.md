@@ -47,6 +47,11 @@ En el server decidí usar las siguientes dependencias:
 
 Para hacer acciones modificadoras (POST, PUT, DELETE) es necesario estar logeado y ser admin. Son los middlewares que deben ser respetados.
 
+# SERVER DEPLOY:
+https://mern-ecommerce-3ngx.onrender.com/
+
+# REACT APP DEPLOY:
+https://oldboxlfc-lautarxtomas.vercel.app/cart
 
        
 
