@@ -26,6 +26,8 @@ En el server decidí usar las siguientes dependencias:
 
 # RECOMENDACIONES
 
+> Probar todo el proyecto en local antes que nada.
+
 > Seguir las rutas configuradas (empezando por "auth") para trazar el camino del proyecto.
 
 > Para registrar un usuario, debemos respetar el schema de MongoDB.
@@ -51,7 +53,7 @@ Para hacer acciones modificadoras (POST, PUT, DELETE) es necesario estar logeado
 https://mern-ecommerce-3ngx.onrender.com/
 
 # REACT APP DEPLOY:
-https://oldboxlfc-lautarxtomas.vercel.app
+https://oldboxlfc-lautarxtomas.vercel.app (por alguna razón no está pudiendo procesar el pago desde el deploy de la app, pero en local funciona perfectamente)
 
        
 
